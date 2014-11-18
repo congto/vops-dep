@@ -1,4 +1,4 @@
-## Huong dan
+## Huong dan thuc thi cac script
 
 # Tai cac goi
 ```sh
