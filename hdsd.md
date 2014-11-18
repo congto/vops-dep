@@ -25,3 +25,23 @@ bash pass-random.sh
  bash control-1.ipadd.sh
  ```
  
+ #### Cai dat cac goi chuan bi
+ ```sh
+ cd vdep/
+bash control-2.prepare.sh
+```
+
+#### Cai dat DB
+```sh
+bash control-3.create-db.sh
+```
+
+#### Cai dat keystone
+```sh
+bash control-4.keystone.sh
+```
+
+#### Tao user, endpoint
+```sh
+bash control-5-creatusetenant.sh
+```
