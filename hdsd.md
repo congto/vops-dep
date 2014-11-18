@@ -14,3 +14,8 @@ cd /root/vdep
 	
 chmod +x *.sh
 ```
+
+### Thực thi script tạo password random
+```sh
+bash pass-random.sh
+```
