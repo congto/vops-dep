@@ -15,7 +15,13 @@ cd /root/vdep
 chmod +x *.sh
 ```
 
-### Thực thi script tạo password random
+#### Thực thi script tạo password random
 ```sh
 bash pass-random.sh
 ```
+
+#### Thiet lap IP cho CONTROLLER
+```sh
+ bash control-1.ipadd.sh
+ ```
+ 
