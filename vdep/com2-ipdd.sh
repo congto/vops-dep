@@ -2,11 +2,10 @@
 
 source config.cfg
 
-echo "Cau hinh hostname cho COMPUTE2 NODE"
+echo "Cau hinh hostname cho COMPUTE1 NODE"
 sleep 3
-echo "compute2" > /etc/hostname
+echo "VDCITC011102" > /etc/hostname
 hostname -F /etc/hostname
-
 
 ifaces=/etc/network/interfaces
 test -f $ifaces.orig || cp $ifaces $ifaces.orig
@@ -19,20 +18,19 @@ cat << EOF >> $ifaces
 auto lo
 iface lo inet loopback
 
-# MGNT NETWORK
-auto eth1
-iface eth1 inet static
-address $COM2_MGNT_IP
-netmask $NETMASK_ADD
+# ADMIN NETWORK
+auto eth0
+iface eth0 inet static
+address $COM2_ADMIN_IP
+netmask $NETMASK_ADD_VM
 gateway $GATEWAY_IP
 dns-nameservers 8.8.8.8
 
-# DATA NETWORK
-auto eth0
-iface eth0 inet static
+# NIC DATA VM
+auto eth2
+iface eth2 inet static
 address $COM2_DATA_VM_IP
 netmask $NETMASK_ADD
-
 
 EOF
 
@@ -41,13 +39,10 @@ EOF
 
 #service networking restart
 # ifdown eth0 && ifup eth0
-# ifdown eth1 && ifup eth1
+# ifdown eth0 && ifup eth0
 
 #sleep 5
 
 init 6
 #
-
-
-
 

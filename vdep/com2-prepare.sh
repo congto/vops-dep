@@ -3,37 +3,27 @@
 
 source config.cfg
 
-# Cau hinh cho file /etc/hosts
-# COM1_IP_MGNT=10.10.10.73
-# COM1_IP_DATA=10.10.20.73
-# COM2_IP_MGNT=10.10.10.74
-# COM2_IP_DATA=10.10.20.74
-# CON_IP_EX=192.168.1.71
-# CON_IP_MGNT=10.10.10.71
-# ADMIN_PASS=a
-# RABBIT_PASS=a
-#
 iphost=/etc/hosts
 test -f $iphost.orig || cp $iphost $iphost.orig
 rm $iphost
 touch $iphost
 cat << EOF >> $iphost
-127.0.0.1       localhost
-$CON_MGNT_IP    controller
-$COM1_MGNT_IP      compute1
-127.0.0.1        compute2
-$COM2_MGNT_IP      compute2
-$NET_MGNT_IP     network
+127.0.0.1       	localhost
+$CON_ADMIN_IP   	VDCITC01101
+$NET_ADMIN_IP     	VDCITN3101
+$COM2_ADMIN_IP      VDCITC011101
+$COM2_ADMIN_IP		VDCITC011102
+$COM3_ADMIN_IP		VDCITC011103
 EOF
 
 # Cai dat repos va update
 
-apt-get install -y python-software-properties &&  add-apt-repository cloud-archive:icehouse -y 
-apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade 
+# apt-get install -y python-software-properties &&  add-apt-repository cloud-archive:icehouse -y 
+# apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade 
 
-# apt-get update -y
-# apt-get upgrade -y
-# apt-get dist-upgrade -y
+apt-get update -y
+apt-get upgrade -y
+apt-get dist-upgrade -y
 
 ########
 echo "############ Cai dat NTP ############"
@@ -41,13 +31,14 @@ echo "############ Cai dat NTP ############"
 #Cai dat NTP va cau hinh can thiet 
 apt-get install ntp -y
 apt-get install python-mysqldb -y
-update-guestfs-appliance
-chmod 0644 /boot/vmlinuz*
-usermod -a -G kvm root
 
 # Cai cac goi can thiet cho compute 
 apt-get install nova-compute-kvm python-guestfs -y
 apt-get install libguestfs-tools -y
+update-guestfs-appliance
+update-guestfs-appliance
+chmod 0644 /boot/vmlinuz*
+usermod -a -G kvm root
 
 ########
 echo "############ Cau hinh NTP ############"
@@ -59,7 +50,7 @@ rm /etc/ntp.conf
 cat /etc/ntp.conf.bka | grep -v ^# | grep -v ^$ >> /etc/ntp.conf
 #
 sed -i 's/server/#server/' /etc/ntp.conf
-echo "server controller" >> /etc/ntp.conf
+echo "server $CON_ADMIN_IP" >> /etc/ntp.conf
 
 echo "net.ipv4.conf.all.rp_filter=0" >> /etc/sysctl.conf
 echo "net.ipv4.conf.default.rp_filter=0" >> /etc/sysctl.conf
@@ -92,12 +83,12 @@ test -f $filenova.orig || cp $filenova $filenova.orig
 cat << EOF > $filenova
 [DEFAULT]
 network_api_class = nova.network.neutronv2.api.API
-neutron_url = http://controller:9696
+neutron_url = http://$CON_ADMIN_IP:9696
 neutron_auth_strategy = keystone
 neutron_admin_tenant_name = service
 neutron_admin_username = neutron
-neutron_admin_password = $ADMIN_PASS
-neutron_admin_auth_url = http://controller:35357/v2.0
+neutron_admin_password = $NEUTRON_PASS
+neutron_admin_auth_url = http://$CON_ADMIN_IP:35357/v2.0
 linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
 security_group_api = neutron
@@ -118,14 +109,15 @@ volumes_path=/var/lib/nova/volumes
 enabled_apis=ec2,osapi_compute,metadata
 auth_strategy = keystone
 rpc_backend = rabbit
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
-my_ip = $COM2_MGNT_IP
+my_ip = $COM2_ADMIN_IP
 vnc_enabled = True
 vncserver_listen = 0.0.0.0
-vncserver_proxyclient_address = $COM2_MGNT_IP
+vncserver_proxyclient_address = $COM2_ADMIN_IP
 novncproxy_base_url = http://$NET_EXT_IP:6080/vnc_auto.html
-glance_host = controller
+glance_host = $CON_ADMIN_IP
+
 
 # Dat Quota cho Project
 quota_instances=9999
@@ -133,16 +125,28 @@ quota_volumes=9999
 quota_injected_files=9999
 quota_cores=9999
 
+
+
+# Cho phep chen password khi khoi tao
+libvirt_inject_password = True
+libvirt_inject_partition = -1
+enable_instance_password = True
+
+# Cho phep thay doi kich thuoc may ao
+allow_resize_to_same_host=True
+scheduler_default_filters=AllHostsFilter
+
 [database]
-connection = mysql://nova:$ADMIN_PASS@controller/nova
+connection = mysql://nova:$NOVA_DBPASS@$CON_ADMIN_IP/nova
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = nova
-admin_password = $ADMIN_PASS
+admin_password = $NOVA_PASS
+
 EOF
 
 # Xoa file sql mac dinh
@@ -181,7 +185,6 @@ EOF
 service nova-compute restart
 
 
-
 # fix loi libvirtError: internal error: no supported architecture for os type 'hvm'
 echo 'kvm_intel' >> /etc/modules
  
@@ -209,7 +212,7 @@ cat << EOF > $comfileneutron
 [DEFAULT]
 auth_strategy = keystone
 rpc_backend = neutron.openstack.common.rpc.impl_kombu
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
 core_plugin = ml2
 service_plugins = router
@@ -225,13 +228,13 @@ notification_driver = neutron.openstack.common.notifier.rpc_notifier
 root_helper = sudo /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf
 
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_protocol = http
 auth_port = 35357
 admin_tenant_name = service
 admin_user = neutron
-admin_password = $ADMIN_PASS
+admin_password = $NEUTRON_PASS
 signing_dir = \$state_path/keystone-signing
 
 [database]
@@ -289,7 +292,7 @@ echo "############ Tao integration bridge ############"
 sleep 5
 ########
 # Tao integration bridge
-ovs-vsctl add-br br-int
+# ovs-vsctl add-br br-int
 
 
 # fix loi libvirtError: internal error: no supported architecture for os type 'hvm'
@@ -317,7 +320,7 @@ sleep 5
 echo "export OS_USERNAME=admin" > admin-openrc.sh
 echo "export OS_PASSWORD=$ADMIN_PASS" >> admin-openrc.sh
 echo "export OS_TENANT_NAME=admin" >> admin-openrc.sh
-echo "export OS_AUTH_URL=http://controller:35357/v2.0" >> admin-openrc.sh
+echo "export OS_AUTH_URL=http://$CON_ADMIN_IP:35357/v2.0" >> admin-openrc.sh
 
 ########
 echo "############ KIEM TRA LAI NOVA va NEUTRON ############"
