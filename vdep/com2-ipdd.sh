@@ -30,7 +30,7 @@ dns-nameservers 8.8.8.8
 auto eth2
 iface eth2 inet static
 address $COM2_DATA_VM_IP
-netmask $NETMASK_ADD
+netmask $NETMASK_ADD_VM
 
 EOF
 
