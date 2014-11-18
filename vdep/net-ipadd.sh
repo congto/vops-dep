@@ -35,7 +35,7 @@ netmask $NETMASK_ADD
 auto br-ex
 iface br-ex inet static
 address $NET_EXT_IP
-netmask $NETMASK_ADD
+netmask $NETMASK_ADD_PUB
 gateway $GATEWAY_NET
 dns-nameservers 8.8.8.8
 
@@ -51,7 +51,7 @@ iface eth1 inet manual
 auto eth2
 iface eth2 inet static
 address $NET_DATA_VM_IP
-netmask $NETMASK_ADD
+netmask $NETMASK_ADD_VM
 EOF
 
 echo "Cau hinh hostname cho NETWORK NODE"
