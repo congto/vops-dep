@@ -50,7 +50,31 @@ bash control-5-creatusetenant.sh
 ```sh
 source admin-openrc.sh
  ```
- #### Cai GLANCE
+#### Cai GLANCE
  ```sh
  bash control-6.glance.sh
+```
+
+#### Cai dat nova
+```sh
+bash control-7.nova.sh
+```
+
+#### Cai dat NEUTRON
+```sh
+bash control-8.neutron.sh
+```
+
+#### Cai dan CINDER
+```sh
+bash control-9.cinder.sh
+```
+
+#### Cai dan HORIZON
+```sh
+control-horizon.sh
+```
+
+## Copy cac file cai dat sang node network, compute 1, 2, 3
+```sh
 ```
