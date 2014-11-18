@@ -16,7 +16,7 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet static
 address $CON_ADMIN_IP
-netmask $NETMASK_ADD_VM
+netmask $NETMASK_ADD
 gateway $GATEWAY_IP
 dns-nameservers 8.8.8.8
 
@@ -25,7 +25,7 @@ dns-nameservers 8.8.8.8
 auto eth1
 iface eth1 inet static
 address $CON_EXT_IP
-netmask $NETMASK_ADD
+netmask $NETMASK_ADD_VM
 
 EOF
 

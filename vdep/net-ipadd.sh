@@ -29,7 +29,7 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet static
 address $NET_ADMIN_IP
-netmask $NETMASK_ADD_VM
+netmask $NETMASK_ADD
 
 # NIC Bridge
 auto br-ex
