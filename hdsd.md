@@ -8,9 +8,9 @@ apt-get install git -y
 	
 git clone https://github.com/congto/vops-dep
 	
-mv /root/U14.04_4-Net/script-U1404-4net script-U1404-4net
+mv /root/vops-dep/vdep vdep
 
-cd /root/script-U1404-4net
+cd /root/vdep
 	
 chmod +x *.sh
 ```
