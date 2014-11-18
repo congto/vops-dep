@@ -2,7 +2,7 @@
 
 source config.cfg
 
-echo "Cau hinh hostname cho COMPUTE1 NODE"
+echo "Cau hinh hostname cho COMPUTE2 NODE"
 sleep 3
 echo "VDCITC011102" > /etc/hostname
 hostname -F /etc/hostname

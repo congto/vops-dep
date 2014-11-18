@@ -2,7 +2,7 @@
 
 source config.cfg
 
-echo "Cau hinh hostname cho COMPUTE1 NODE"
+echo "Cau hinh hostname cho COMPUTE3 NODE"
 sleep 3
 echo "VDCITC011103" > /etc/hostname
 hostname -F /etc/hostname
@@ -30,7 +30,7 @@ dns-nameservers 8.8.8.8
 auto eth2
 iface eth2 inet static
 address $COM3_DATA_VM_IP
-netmask $NETMASK_ADD
+netmask $NETMASK_ADD_VM
 
 EOF
 
