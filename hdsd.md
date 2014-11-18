@@ -77,6 +77,15 @@ bash control-horizon.sh
 
 ## Copy cac file cai dat sang node network, compute 1, 2, 3
 ```sh
- scp -r /root/vdep/ root@'10.145.37.79':/root
- scp -r /root/vops-dep/ root@'10.145.37.79':/root
+scp -r /root/vdep/ root@'10.30.0.21':/root
+scp -r /root/vops-dep/ root@'10.30.0.21':/root
+
+scp -r /root/vdep/ root@'10.30.0.31':/root
+scp -r /root/vops-dep/ root@'10.30.0.31':/root
+
+scp -r /root/vdep/ root@'10.30.0.32':/root
+scp -r /root/vops-dep/ root@'10.30.0.32':/root
+
+scp -r /root/vdep/ root@'10.30.0.33':/root
+scp -r /root/vops-dep/ root@'10.30.0.33':/root
  ```
