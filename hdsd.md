@@ -45,3 +45,12 @@ bash control-4.keystone.sh
 ```sh
 bash control-5-creatusetenant.sh
 ```
+
+#### Tao bien moi truong
+```sh
+source admin-openrc.sh
+ ```
+ #### Cai GLANCE
+ ```sh
+ bash control-6.glance.sh
+```
