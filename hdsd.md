@@ -72,9 +72,11 @@ bash control-9.cinder.sh
 
 #### Cai dan HORIZON
 ```sh
-control-horizon.sh
+bash control-horizon.sh
 ```
 
 ## Copy cac file cai dat sang node network, compute 1, 2, 3
 ```sh
-```
+ scp -r /root/vdep/ root@'10.145.37.79':/root
+ scp -r /root/vops-dep/ root@'10.145.37.79':/root
+ ```
