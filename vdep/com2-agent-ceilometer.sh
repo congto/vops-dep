@@ -1,14 +1,14 @@
 #!/bin/bash -ex
-source config.cfg
 
+source config.cfg
 apt-get install ceilometer-agent-compute -y
-sleep 7
+
 echo "Cau hinh cho ceilometer"
-fileceilocom1=/etc/ceilometer/ceilometer.conf
-test -f $fileceilocom1.orig || cp $fileceilocom1 $fileceilocom1.orig
-rm $fileceilocom1
-touch $fileceilocom1
-cat << EOF > $fileceilocom1
+fileceilocom2=/etc/ceilometer/ceilometer.conf
+test -f $fileceilocom2.orig || cp $fileceilocom2 $fileceilocom2.orig
+rm $fileceilocom2
+touch $fileceilocom2
+cat << EOF > $fileceilocom2
 [DEFAULT]
 sqlite_db=ceilometer.sqlite
 rabbit_host = $CON_ADMIN_IP
@@ -52,8 +52,6 @@ os_password = $CEILOMETER_PASS
 
 EOF
 
-sleep 7
-echo "cau hinh agent cho compute"
 sed -i  's/#instance_usage_audit/instance_usage_audit/' /etc/nova/nova.conf
 sed -i  's/#instance_usage_audit_period/instance_usage_audit_period/' /etc/nova/nova.conf
 sed -i  's/#notify_on_state_change/notify_on_state_change/' /etc/nova/nova.conf

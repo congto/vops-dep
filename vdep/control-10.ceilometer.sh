@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 source config.cfg
+sleep 3
 
 echo -e "\e[34m ##### Tao endpoint #####\e[0m"
 keystone user-create --name=ceilometer --pass=$CEILOMETER_PASS --email=ceilometer@vdc.com.vn
@@ -14,22 +15,22 @@ keystone endpoint-create \
 --internalurl=http://$CON_ADMIN_IP:8777 \
 --adminurl=http://$CON_ADMIN_IP:8777
 
-
+sleep 7
 echo -e "\e[34m ##### Cai cac goi cho  Telemetry #####\e[0m"
-apt-get install ceilometer-api ceilometer-collector ceilometer-agent-central \
+apt-get -y install ceilometer-api ceilometer-collector ceilometer-agent-central \
 ceilometer-agent-notification ceilometer-alarm-evaluator ceilometer-alarm-notifier python-ceilometerclient
 
 echo -e "\e[34m ##### Cai cac goi cho mongodb-server #####\e[0m"  
-apt-get install mongodb-server
+apt-get -y install mongodb-server
 service mongodb stop
 # rm /var/lib/mongodb/journal/prealloc.*
 service mongodb start
 
 sed -i "s/127.0.0.1/$CON_ADMIN_IP/g" /etc/mongodb.conf
 
-service mongodb start
+service mongodb restart
 
-
+sleep 7
 mongo --host $CON_ADMIN_IP --eval '
 db = db.getSiblingDB("ceilometer");
 db.addUser({user: "ceilometer",
@@ -39,11 +40,12 @@ db.addUser({user: "ceilometer",
 
 ####
 echo "Cau hinh cho ceilometer"
+sleep 7
 fileceilo=/etc/ceilometer/ceilometer.conf
 test -f $fileceilo.orig || cp $fileceilo $fileceilo.orig
-rm $iphost
-touch $iphost
-cat << EOF >>
+rm $fileceilo
+touch $fileceilo
+cat << EOF > $fileceilo
 [DEFAULT]
 log_dir = /var/log/ceilometer
 sqlite_db=ceilometer.sqlite
