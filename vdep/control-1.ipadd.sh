@@ -25,7 +25,7 @@ netmask $NETMASK_ADD
 auto em2
 iface em2 inet static
 address $CON_EXT_IP
-netmask $NETMASK_ADD_VM
+netmask $NETMASK_ADD_PORTAL
 
 # INTERNET TAM
 auto em3
