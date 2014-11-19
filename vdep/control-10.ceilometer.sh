@@ -34,7 +34,7 @@ sleep 7
 mongo --host $CON_ADMIN_IP --eval '
 db = db.getSiblingDB("ceilometer");
 db.addUser({user: "ceilometer",
-            pwd: "$CEILOMETER_DBPASS",
+            pwd: "e83f7e744309d0f61f88",
             roles: [ "readWrite", "dbAdmin" ]})'
 			
 
@@ -80,7 +80,7 @@ admin_password = $CEILOMETER_PASS
 [matchmaker_ring]
 [notification]
 [publisher]
-metering_secret = $METERING_SECRET
+metering_secret = $CEILOMETER_TOKEN
 
 [publisher_rpc]
 

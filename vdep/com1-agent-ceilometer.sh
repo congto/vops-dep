@@ -36,7 +36,7 @@ admin_password = $CEILOMETER_PASS
 [notification]
 
 [publisher]
-metering_secret = $METERING_SECRET
+metering_secret = $CEILOMETER_TOKEN
 
 [publisher_rpc]
 [rpc_notifier2]

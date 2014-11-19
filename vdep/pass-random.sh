@@ -60,7 +60,7 @@ GLANCE_PASS=`openssl rand -hex 10`
 NEUTRON_PASS=`openssl rand -hex 10`
 SWIFT_PASS=`openssl rand -hex 10`
 CEILOMETER_PASS=`openssl rand -hex 10`
-METERING_SECRET=`openssl rand -hex 10`
+CEILOMETER_TOKEN=`openssl rand -hex 10`
 
 
 SERVICE_TENANT_NAME="service"
