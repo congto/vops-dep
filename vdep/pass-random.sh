@@ -49,6 +49,8 @@ NOVA_DBPASS=`openssl rand -hex 10`
 CINDER_DBPASS=`openssl rand -hex 10`
 GLANCE_DBPASS=`openssl rand -hex 10`
 NEUTRON_DBPASS=`openssl rand -hex 10`
+CEILOMETER_DBPASS=`openssl rand -hex 10`
+SWIFT_DBPASS=`openssl rand -hex 10`
 
 # PASS cho service
 KEYSTONE_PASS=`openssl rand -hex 10`
@@ -56,6 +58,9 @@ NOVA_PASS=`openssl rand -hex 10`
 CINDER_PASS=`openssl rand -hex 10`
 GLANCE_PASS=`openssl rand -hex 10`
 NEUTRON_PASS=`openssl rand -hex 10`
+SWIFT_PASS=`openssl rand -hex 10`
+CEILOMETER_PASS=`openssl rand -hex 10`
+METERING_SECRET=`openssl rand -hex 10`
 
 
 SERVICE_TENANT_NAME="service"

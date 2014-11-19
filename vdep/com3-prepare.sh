@@ -34,6 +34,7 @@ apt-get install python-mysqldb -y
 
 # Cai cac goi can thiet cho compute 
 apt-get install nova-compute-kvm python-guestfs -y
+apt-get install ceilometer-agent-compute -y
 apt-get install libguestfs-tools -y
 update-guestfs-appliance
 update-guestfs-appliance
@@ -118,6 +119,12 @@ vncserver_proxyclient_address = $COM3_ADMIN_IP
 novncproxy_base_url = http://$NET_EXT_IP:6080/vnc_auto.html
 glance_host = $CON_ADMIN_IP
 
+# Khai bao cho CEILOMETER
+instance_usage_audit = True
+instance_usage_audit_period = hour
+notify_on_state_change = vm_and_task_state
+notification_driver = nova.openstack.common.notifier.rpc_notifier
+notification_driver = ceilometer.compute.nova_notifier
 
 # Dat Quota cho Project
 quota_instances=9999
