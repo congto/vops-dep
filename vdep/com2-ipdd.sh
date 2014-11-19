@@ -2,6 +2,7 @@
 
 source config.cfg
 
+sudo timedatectl set-timezone  Asia/Ho_Chi_Minh
 echo "Cau hinh hostname cho COMPUTE2 NODE"
 sleep 3
 echo "VDCITC011102" > /etc/hostname

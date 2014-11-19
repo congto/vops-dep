@@ -1,6 +1,7 @@
 #!/bin/bash -ex
 source config.cfg
 
+sudo timedatectl set-timezone  Asia/Ho_Chi_Minh
 ifaces=/etc/network/interfaces
 test -f $ifaces.orig || cp $ifaces $ifaces.orig
 rm $ifaces

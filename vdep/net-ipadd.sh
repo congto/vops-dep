@@ -2,6 +2,7 @@
 
 source config.cfg
 
+sudo timedatectl set-timezone  Asia/Ho_Chi_Minh
 # UPDATE Ubuntu
 apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y
 
