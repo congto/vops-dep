@@ -109,5 +109,5 @@ service ceilometer-alarm-notifier restart
 ###################
 echo -e "\e[34m ######### Hoan thanh viec cai dat CEILOMETER ##########\e[0m"
 
-echo -e "\e[92m Chuyen sang thu hien tren NETWORK NODE va COMPUTE NODE \e[0m"
-echo -e "\e[92m Sau do quay lai $CON_ADMIN_IP de cai Hoziron\e[0m "
+echo -e "\e[92m Hoan thanh viec cai dat CEILOMETER \e[0m"
+# echo -e "\e[92m Sau do quay lai $CON_ADMIN_IP de cai Hoziron\e[0m "

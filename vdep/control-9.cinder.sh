@@ -67,6 +67,8 @@ service cinder-scheduler restart
 service cinder-volume restart
 
 echo -e "\e[34m ######### Hoan thanh viec cai dat CINDER ##########\e[0m"
+echo -e "\e[92m ######### CAI DAT CEILOMETER ##########\e[0m"
+echo -e "\e[92m bash control-10.ceilometer.sh\e[0m"
 
 echo -e "\e[92m Chuyen sang thu hien tren NETWORK NODE va COMPUTE NODE \e[0m"
 echo -e "\e[92m Sau do quay lai $CON_ADMIN_IP de cai Hoziron\e[0m "

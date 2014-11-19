@@ -19,27 +19,21 @@ auto lo
 iface lo inet loopback
 
 # ADMIN NETWORK
-auto eth0
-iface eth0 inet static
+auto em1
+iface em1 inet static
 address $COM1_ADMIN_IP
 netmask $NETMASK_ADD
 gateway $GATEWAY_IP
 dns-nameservers 8.8.8.8
 
 # NIC DATA VM
-auto eth2
-iface eth2 inet static
+auto em3
+iface em3 inet static
 address $COM1_DATA_VM_IP
 netmask $NETMASK_ADD_VM
 
 EOF
 
-#Khoi dong lai cac card mang vua dat
-#service networking restart
-
-#service networking restart
-# ifdown eth0 && ifup eth0
-# ifdown eth0 && ifup eth0
 
 #sleep 5
 
