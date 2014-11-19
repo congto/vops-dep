@@ -54,4 +54,4 @@ echo "########## Hoan thanh cai dat Horizon ##########"
 echo "########## THONG TIN DANG NHAP VAO HORIZON ##########"
 echo "URL: http://$CON_EXT_IP/horizon"
 echo "User: admin hoac demo"
-echo "Password:" $ADMIN_PASS
+echo "Password: XEM FILE CAU HINH"

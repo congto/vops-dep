@@ -35,7 +35,7 @@ rm /etc/ntp.conf
 cat /etc/ntp.conf.bka | grep -v ^# | grep -v ^$ >> /etc/ntp.conf
 #
 sed -i 's/server/#server/' /etc/ntp.conf
-echo "server controller" >> /etc/ntp.conf
+echo "server VDCITC01101" >> /etc/ntp.conf
 
 echo "Cai dat RABBITMQ  va cau hinh RABBITMQ"
 sleep 3

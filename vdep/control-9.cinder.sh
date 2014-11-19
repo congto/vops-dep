@@ -31,7 +31,8 @@ auth_strategy = keystone
 state_path = /var/lib/cinder
 lock_path = /var/lock/cinder
 volumes_dir = /var/lib/cinder/volumes
-rpc_backend = cinder.openstack.common.rpc.impl_kombu
+rpc_backend =
+cinder.openstack.common.rpc.impl_kombu
 rabbit_host = $CON_ADMIN_IP
 rabbit_port = 5672
 rabbit_userid = guest

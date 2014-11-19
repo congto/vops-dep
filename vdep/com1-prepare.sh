@@ -164,8 +164,6 @@ rm /var/lib/nova/nova.sqlite
 #echo "/dev/$INS1 /mnt/iscsi ext4 _netdev 0 0" >> /etc/fstab
 
 
-
-
 # Cau hinh Live Migration
 echo 'listen_tls = 0' >> /etc/libvirt/libvirtd.conf
 echo 'listen_tcp = 1' >> /etc/libvirt/libvirtd.conf
