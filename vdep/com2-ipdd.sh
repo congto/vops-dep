@@ -23,8 +23,8 @@ auto em1
 iface em1 inet static
 address $COM2_ADMIN_IP
 netmask $NETMASK_ADD
-gateway $GATEWAY_IP
-dns-nameservers 8.8.8.8
+# gateway $GATEWAY_IP
+# dns-nameservers 8.8.8.8
 
 # NIC DATA VM
 auto em3
@@ -32,6 +32,13 @@ iface em3 inet static
 address $COM2_DATA_VM_IP
 netmask $NETMASK_ADD_VM
 
+# INTERNET TAM
+auto em2
+iface em2 inet static
+address 123.31.10.3
+netmask 255.255.255.0
+gateway 123.31.10.1
+dns-nameservers 8.8.8.8
 EOF
 
 #sleep 5
